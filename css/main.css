@@ -1,0 +1,188 @@
+*{margin: 0; 
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	font-family: Arial, "helvetica Neue", Helvetica, sans-serif; 
+	font-size: 14px;
+}
+
+/* -------------------------------------- header page -------------------------------------- */
+
+header{
+	background: rgb(214, 214, 214);
+	overflow: auto;
+	padding: 20px;
+}
+
+header .logo{
+	float: left;
+	width: 30%;
+}
+header .search{
+	float: left;
+	width: 40%;
+}
+header .search input{
+	float: left;
+	font-size: 14px;
+	padding: 10px;
+	width: 60%;
+	border-radius: 5px;
+	border: 1px solid #ccd0d5;
+	border: none;
+}
+header .search img{
+	margin: 6px 10px;
+}
+header .h-btn{
+	float: left;
+	width: 30%;
+}
+header .h-btn button{
+	float: right;
+	padding: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	text-align: center;
+	background-color: #3c3c3c;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+/* -------------------------------------- footer page -------------------------------------- */
+	
+body {
+	position: relative;
+	min-height: 100vh;
+	margin: 0;
+	padding-bottom: 100px; /* Set the height of the footer */
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: lightgray;
+	padding: 20px 0;
+}
+
+.footer .container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.footer p {
+	color: #333;
+	text-align: center;
+	margin: 0;
+}
+
+
+/* -------------------------------------- Login page -------------------------------------- */
+.login{
+	width: 350px;
+	margin: 50px auto;
+}
+.login fieldset{
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.login input {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	border: 1px solid #ccd0d5;
+}
+
+.login input[type="submit"] {
+ 	text-align: center;
+    background-color: #2883fa;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+	margin-top: 10px;
+}
+
+.login input[type="submit"]:hover {
+    background-color: #1877f2;
+}
+
+.login h2{
+	text-align: center;
+	margin: 10px 0px 20px 0px;
+} 
+
+/* -------------------------------------- Register page -------------------------------------- */
+.register{
+	width: 450px;
+	margin: 50px auto;
+}
+.register fieldset{
+	padding: 10px;
+	border-radius: 5px;
+}
+.register .row{
+	display: flex;
+	
+	
+}
+.register .row .item{
+	width: 50%;
+
+}
+
+.register .row .right{
+	margin-left: 10px;
+
+}
+.register .row-dob{
+	display: flex;
+	flex-direction: column;
+}
+.register .row-dob label{
+	color: #898888;
+	margin-left: 10px;
+}
+.register input ,.register select, .register textarea{
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	border: 1px solid #ccd0d5;
+}
+.register textarea{
+	height: 100px;
+}
+.register input[type="submit"] {
+	text-align: center;
+   background-color: #2883fa;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   margin-top: 10px;
+}
+.register input[type="submit"]:hover {
+    background-color: #1877f2;
+}
+.register h2{
+	text-align: center;
+	margin: 10px 0px 20px 0px;
+} 
+.register .row-check{
+	display: flex;
+}
+.register .row-check .left{
+	margin-left: 10px;
+}
+.register .row-check .right{
+	margin-left: 10px;
+}
