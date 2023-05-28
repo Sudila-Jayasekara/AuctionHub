@@ -212,23 +212,17 @@ body {
 	margin-bottom: 10px;
 	margin-top: 10px;
 	margin-right: 10px;
-
-}
-.item-container{
-	overflow: hidden;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	display: flex;
-	justify-content:space-evenly ;
-	flex-wrap: wrap;
 }
 
 .item-container .item{
+	float: left;
 	overflow: hidden;
+	margin-right: 10px;
 	background-color: lightgoldenrodyellow;
 	border: 1px solid black;
 	width: 239px;
 	border-radius: 10px;
+	margin-bottom: 10px;
 }
 .item-container .item .image img{
 	width: 239px;

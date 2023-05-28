@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require_once('inc/config.php'); ?>
 <?php require_once('inc/functions.php'); ?>
 <?php 
@@ -75,7 +76,8 @@
 			$password = $con->real_escape_string($_POST['password']); 
 			$hashed_password = sha1($password);
 
-			$sql = "INSERT INTO user(first_name,last_name,email,dob,age,gender,phone_number,address,password,is_bidder,registration_date)
+			//create database query
+			$sql = "INSERT INTO user(first_name,last_name,email,dob,age,gender,phone_number,address,hashed_password,is_bidder,registration_date)
 					VALUES('{$first_name}','{$last_name}','{$email}','{$dob}','{$age}','{$gender}','{$phone_number}','{$address}','{$hashed_password}',1,'{$currentTime}')";
 			$result = $con -> query($sql);
 		}else {
@@ -136,3 +138,4 @@
 	<?php require 'inc/footer.php'; ?>
 </body>
 </html>
+<?php $con->close(); ?>
