@@ -1,7 +1,32 @@
 <?php session_start(); ?>
 <?php require_once('inc/config.php'); ?>
 <?php require_once('inc/functions.php'); ?>
+<?php require_once('inc/check-login.php'); ?>
+<?php 
+	$item = '';
 
+	$sql = "SELECT * FROM item";
+	$result = $con->query($sql);
+	while($row = $result->fetch_assoc()){
+		$item.= "<div class='item'>";
+		$item.=		"<div class='image'>";
+		$item .= "<img src='image/item/{$row["image"]}'>";
+		$item.=		"</div>";
+		$item.=		"<div class='info'>";
+		$item.=			"<p><b>{$row['item_name']} -</b> <br> {$row['item_description']}</p>";
+		$item.=			"<div class='price'>";
+		$item.=				"<h1>$ {$row['start_price']}</h1>";
+		$item.=				"<p>Bids - {$row['numberOf_bids']}</p>";
+		$item.=			"</div>";
+		$item.=			"<div class='btn-set'>";
+		$item.=				"<button class='btn'>Place a bid</button>";
+		$item.=				"<button class='btn2'><img src='image/icons/heart.png'></button>";
+		$item.=			"</div>";
+		$item.=		"</div>";
+		$item.=	"</div>";
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,30 +34,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AuctionHub</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<?php require 'inc/header.php'; ?>
 </head>
 <body>
-	<!-- <form class="login" action="login.php" method="post">
-		<fieldset>
-			<h2>Login to AuctionHub</h2>
-			<input type="text" name="email" placeholder="Email Address">
-			<input type="text" name="password" placeholder="Password">
-			<input type="submit" name="login" value="Login">
-		</fieldset>
-	</form> -->
-
-
-
-	<!-- <div class="content">
-		<form class="side-bar"act ion="">
-			<h3>Category</h3>
-		</form>
-		<div class=" ">
-		<div class="top-bar">
-			breadcrumb
-		</div>
-		</div>		
-	</div> -->
+	<?php require_once('inc/header.php')?>
 	<div class="content">
 		<div class="side-bar">
 			<h3>Category</h3>
@@ -45,89 +49,8 @@
 		</div>
 
 		<div class="item-container">
-			<div class="item">
-				<div class="image">
-					<img src="image/iphone2.jpg" alt="">	
-				</div>
-				<div class="info">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="price">
-						<h1>$100</h1>
-						<p>Bids - 12</p>
-					</div>
-					<div class="btn-set">
-						<button class="btn">Place a bid</button>
-						<button class="btn2"><img src="image/heart.png" alt=""></button>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="image">
-					<img src="image/iphone3.jpg" alt="">	
-				</div>
-				<div class="info">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="price">
-						<h1>$100</h1>
-						<p>Bids - 12</p>
-					</div>
-					<div class="btn-set">
-						<button class="btn">Place a bid</button>
-						<button class="btn2"><img src="image/heart.png" alt=""></button>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="image">
-					<img src="image/iphone.jpg" alt="">	
-				</div>
-				<div class="info">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="price">
-						<h1>$100</h1>
-						<p>Bids - 12</p>
-					</div>
-					<div class="btn-set">
-						<button class="btn">Place a bid</button>
-						<button class="btn2"><img src="image/heart.png" alt=""></button>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="image">
-					<img src="image/iphone5.jpg" alt="">	
-				</div>
-				<div class="info">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="price">
-						<h1>$100</h1>
-						<p>Bids - 12</p>
-					</div>
-					<div class="btn-set">
-						<button class="btn">Place a bid</button>
-						<button class="btn2"><img src="image/heart.png" alt=""></button>
-					</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="image">
-					<img src="image/iphone4.jpg" alt="">	
-				</div>
-				<div class="info">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-					<div class="price">
-						<h1>$100</h1>
-						<p>Bids - 12</p>
-					</div>
-					<div class="btn-set">
-						<button class="btn">Place a bid</button>
-						<button class="btn2"><img src="image/heart.png" alt=""></button>
-					</div>
-				</div>
-			</div>
+			<?php echo $item ?>
 		</div>
-
-		
 	<?php require 'inc/footer.php'; ?>
 </body>
 </html>

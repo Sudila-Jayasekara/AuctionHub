@@ -28,16 +28,19 @@
 			$password = $con->real_escape_string($_POST['password']);
 			$hashed_password = sha1($password);
 
-			$sql = "SELECT * FROM user WHERE email='{$email}' and hashed_password ='{$hashed_password}' LIMIT 1";
+			$sql = "SELECT * FROM users WHERE email='{$email}' and password ='{$hashed_password}' LIMIT 1";
 			$result = $con->query($sql);
+			
 
 			//check database query failed  -- -- -- 
 
 			if($result->num_rows == 1){
 				//valid user found
 				$row = $result->fetch_assoc();
-
+				$_SESSION['user_id'] = $row['user_id'];
+				$_SESSION['first_name'] = $row['first_name'];
 				//header
+				header('Location:index.php');
 			}else {
 				$errors[]= "Wrong email or Password";
 				echo "<script>alert('{$errors[0]}')</script>";
@@ -57,9 +60,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login Page</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<?php require 'inc/header.php'; ?>
 </head>
 <body>
+	<?php require_once 'inc/guest-header.php'; ?>
 	<form class="login" action="login.php" method="post">
 		<fieldset>
 			<h2>Login to AuctionHub</h2>
@@ -68,7 +71,7 @@
 			<input type="submit" name="login" value="Login">
 		</fieldset>
 	</form>
-	<?php require 'inc/footer.php'; ?>
+	<?php require_once 'inc/footer.php'; ?>
 </body>
 </html>
 <?php $con->close(); ?>

@@ -15,9 +15,9 @@
 			<img src="image/icons/cart.png"class="m-item">
 			<img src="image/icons/notification.png"class="m-item">
 		</div>
-		<div class="user">
-			<div class="img"><a href="bidder-dashboard.php"><img src="image/icons/user.png" alt=""></a></div>
-			<div><a href="bidder-dashboard.php"><?php echo $_SESSION['first_name']; ?></a></div>
+		<div class="h-btn">
+			<a href="login.php"><button class="btn">Login</button>	</a>
+			<a href="register.php"><button class="btn">Register</button>	</a>
 		</div>
 	</header>
 </body>

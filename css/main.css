@@ -18,10 +18,20 @@ header{
 header .logo{
 	float: left;
 	width: 30%;
+	margin-top: 10px;
 }
+header .logo a{
+	text-decoration: none;
+	color: black;
+}
+
 header .search{
+	overflow: hidden;
+	margin-top: 5px;
 	float: left;
 	width: 40%;
+	margin-right: 20%;
+
 }
 header .search input{
 	float: left;
@@ -35,10 +45,7 @@ header .search input{
 header .search img{
 	margin: 6px 10px;
 }
-header .h-btn{
-	float: left;
-	width: 30%;
-}
+
 header .h-btn button{
 	float: right;
 	padding: 10px;
@@ -51,7 +58,20 @@ header .h-btn button{
 	cursor: pointer;
 	margin-left: 10px;
 }
+header .h-btn button:hover{
+	background-color: #ffffff;
+	color: black;
+}
 
+header .user{
+	overflow: hidden;
+	margin-left: 400px;
+	text-align: center;
+}
+header .user a{
+	text-decoration: none;
+	color: black;
+}
 /* -------------------------------------- footer page -------------------------------------- */
 	
 body {
@@ -123,7 +143,7 @@ body {
 /* -------------------------------------- Register page -------------------------------------- */
 .register{
 	width: 450px;
-	margin: 50px auto;
+	margin: 10px auto;
 }
 .register fieldset{
 	padding: 10px;
@@ -150,6 +170,7 @@ body {
 .register .row-dob label{
 	color: #898888;
 	margin-left: 10px;
+	
 }
 .register input ,.register select, .register textarea{
 	width: 100%;
@@ -214,12 +235,17 @@ body {
 	margin-right: 10px;
 
 }
+.content .top-bar h3{
+	display: inline;
+}
+.content .top-bar a{
+	text-decoration: none;
+	color: black;
+}
+
 .item-container{
 	overflow: hidden;
-	margin-right: 10px;
-	margin-bottom: 10px;
 	display: flex;
-	justify-content:space-evenly ;
 	flex-wrap: wrap;
 }
 
@@ -227,11 +253,18 @@ body {
 	overflow: hidden;
 	background-color: lightgoldenrodyellow;
 	border: 1px solid black;
-	width: 239px;
+	width: 235px;
 	border-radius: 10px;
+	margin-bottom: 14px;
+	margin-right: 14.5px;
+}
+.item-container .item .image{
+	overflow: hidden;
+	width: 235px;
+	height: 150px;
 }
 .item-container .item .image img{
-	width: 239px;
+	width: 235px;
 }
 
 .item-container .item .info{
@@ -265,7 +298,7 @@ body {
 	float: left;
 	padding: 10px;
 	border-radius: 10px;
-	width: 166px;
+	width: 160px;
 }
 
 .item-container .item .btn-set .btn2{
@@ -277,4 +310,42 @@ body {
 	margin-left: 10px;
 	
 }
+/* -------------------------------------- bidder-dashboard page -------------------------------------- */
 
+.container{
+	overflow: hidden;
+	text-align: center;
+}
+.register .row-dob{
+	text-align: left;	
+}
+.content .side-bar h3{
+	margin-top: 5px;
+	margin-bottom: 35px;
+}
+.content .side-bar button{
+	width: 100%;
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	cursor:pointer;
+}
+.content .side-bar hr{
+	margin-bottom: 10px;
+}
+
+.content .side-bar:hover{
+	background-color: #898888;
+}
+
+.content .side-bar button:hover{
+	background-color: #333;
+	color: white;
+}
+
+.content .top-bar:hover{
+	background-color: #898888;
+}
+.content .top-bar a:hover{
+	color: white;
+}
