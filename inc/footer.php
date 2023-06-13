@@ -9,7 +9,7 @@
 <body>
 <footer class="footer">
   <div class="container">
-    <p>This is the footer content.</p>
+  	<p>&copy; 2023 AuctionHub. All rights reserved.</p>
   </div>
 </footer>
 

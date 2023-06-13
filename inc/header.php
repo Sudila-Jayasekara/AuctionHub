@@ -1,3 +1,6 @@
+<?php 
+$search ='';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +13,16 @@
 	<header>
 		<div class="logo"><h1><a href="index.php">AuctionHub</a></h1></div>
 		<div class="search">
-			<input type="text" name="" placeholder="Search" class="m-item">
+			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+			<input type="text" name="search" placeholder = "Press Enter for search "value="<?php echo $search; ?>" class="m-item">
+			</form>
 			<img src="image/icons/loupe.png"class="m-item">
 			<img src="image/icons/cart.png"class="m-item">
 			<img src="image/icons/notification.png"class="m-item">
 		</div>
 		<div class="user">
-			<div class="img"><a href="bidder-dashboard.php"><img src="image/icons/user.png" alt=""></a></div>
-			<div><a href="bidder-dashboard.php"><?php echo $_SESSION['first_name']; ?></a></div>
+			<div class="img"><a href="check-user-type.php"><img src="image/icons/user.png" alt=""></a></div>
+			<div><a href="check-user-type.php"><?php echo $_SESSION['first_name']; ?></a></div>
 		</div>
 	</header>
 </body>

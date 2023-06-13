@@ -4,12 +4,22 @@
 <?php require_once('inc/check-login.php'); ?>
 <?php 
 	$errors = array();
-	$item_name = ''; 
-	$item_description = ''; 
-	$price = '';
-	$end_date = '';
-	$category_id = '';
-
+	if(isset($_GET['item_id'])){
+		$sql = "SELECT * FROM item WHERE item_id = {$_GET['item_id']} ";
+		$result = $con->query($sql);
+		$row = $result->fetch_assoc();
+		if($row['numberOf_bids']>0){
+			echo "<script>alert('You can not edit item details after start bidding')</script>";
+			echo "<script>history.back()</script>";
+		}
+		$item_id = $_GET['item_id'];
+		$item_name = $row['item_name']; 
+		$item_description = $row['item_description']; 
+		$price = $row['price'];
+		$end_date = $row['end_date'];
+		$category_id = $row['category_id'];
+	
+	}
 	if (isset($_POST['Submit'])) {
 		$item_name = $_POST['item_name']; 
 		$item_description = $_POST['item_description']; 
@@ -42,25 +52,15 @@
 
 			//create database query
 			//user index`
-			$sql = "INSERT INTO item(item_name,item_description,image,numberOf_bids,price,end_date,is_reported,seller_id,category_id)
-					VALUES('{$item_name}','{$item_description}','{$image}',0,'{$price}','{$end_date}',0,'{$_SESSION['seller_id']}','{$category_id}')";
-			$result = $con -> query($sql);
-
-			//get item details
-			$sql = "SELECT * from item WHERE item_name='{$item_name}' AND seller_id='{$_SESSION['seller_id']}'";
-			$result = $con -> query($sql);
-			$row = $result->fetch_assoc();
-
-			//set first bid on item
-			$sql = "INSERT INTO bidder_item(bidder_id,item_id,bid_value) VALUES ('{$_SESSION["bidder_id"]}','{$row["item_id"]}','{$price}')";
-			$result = $con -> query($sql);
+			// $sql = "INSERT INTO item(item_name,item_description,image,numberOf_bids,price,end_date,is_reported,seller_id,category_id)
+			// 		VALUES('{$item_name}','{$item_description}','{$image}',1,'{$price}','{$end_date}',0,'{$_SESSION['seller_id']}','{$category_id}')";
 			
-			if (!$result) {
-				die("Error: " . $con->error);
-			}
+			$sql = "UPDATE item SET item_name='{$item_name}',item_description='{$item_description}',image='{$image}',price='{$price}',end_date='{$end_date}',category_id='{$category_id}' WHERE item_id={$_GET['item_id']}";
+			$result = $con -> query($sql);
+
 
 			if(move_uploaded_file($_FILES['image']['tmp_name'],$target)){
-				//echo "Image uploaded Successfully";
+				echo "Image uploaded Successfully";
 			}else{
 				echo "There was a problem";
 			}
@@ -105,24 +105,16 @@
 		<div class="top-bar">
 			<h3><a href="index.php">AuctionHub</a></h3>
 			<h3> > </h3>
-			<?php 
-				if($_SESSION['is_admin']==1 && $_SESSION['is_seller']==1 && $_SESSION['is_bidder']==1){
-					echo "<h3><a href='admin-dashboard.php'>Admin Dashboard</a></h3>";
-				}else if($_SESSION['is_seller']==1 && $_SESSION['is_bidder']==1){
-					echo "<h3><a href='seller-dashboard.php'>Seller Dashboard</a></h3>";
-				}else if($_SESSION['is_bidder']==1){
-					echo "<h3><a href='bidder-dashboard.php'>Bidder Dashboard</a></h3>";
-				}
-			?>
+			<h3><a href="Seller-dashboard.php">Seller Dashboard</a></h3>
 			<h3> > </h3>
 			<h3><a href="add-new-item.php">Add New Item</a></h3>
 		</div>
 		<div class="container">
-			<form class="register" action="add-new-item.php" method="post" enctype="multipart/form-data">
+			<form class="register" action="edit-item.php?item_id=<?php echo $item_id;?>" method="post" enctype="multipart/form-data">
 				<fieldset>
-						<h2>Add New Item</h2>
-						<input type="text" name = "item_name" placeholder = "item_name">
-						<textarea name="item_description"  placeholder="item_description"></textarea>
+						<h2>Edit Item details</h2>
+						<input type="text" name = "item_name" value="<?php echo $item_name?>">
+						<textarea name="item_description"  placeholder="item_description"><?php echo $item_description?></textarea>
 						<div class="row">
 						<div class="item left"><input type="file" name="image"></div>
 						<div class="item right">
@@ -133,10 +125,10 @@
 						</div>
 						</div>
 						
-						<input type="text" name = "price" placeholder = "price">
+						<input type="text" name = "price" value="<?php echo $price?>">
 						<label for="date">End date</label>
-						<input type="datetime-local" name="end_date">
-						<input type="submit" name="Submit" value="Submit">
+						<input type="date" name="end_date" value="<?php echo $end_date?>">
+						<input type="submit" name="Submit" value="Update Item details">
 				</fieldset>
 			</form>
 		</div>

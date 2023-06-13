@@ -39,8 +39,70 @@
 				$row = $result->fetch_assoc();
 				$_SESSION['user_id'] = $row['user_id'];
 				$_SESSION['first_name'] = $row['first_name'];
-				//header
+
+				if($row['is_bidder'] == 1 && $row['is_seller']==1 &&$row['is_admin']==1){
+					$_SESSION['is_bidder'] = 1;
+					$_SESSION['is_seller'] = 1;
+					$_SESSION['is_admin'] = 1;
+
+					// get bidder id
+					$sql1 = "SELECT bidder_id FROM bidder WHERE user_id = '{$row['user_id']}' ";
+					$result1 = $con->query($sql1);
+					$row1 = $result1->fetch_assoc();
+					$_SESSION['bidder_id'] = $row1['bidder_id'];
+					
+					//get seller id
+					$sql2 = "SELECT seller_id FROM seller WHERE user_id = '{$row['user_id']}' ";
+					$result2 = $con->query($sql2);
+					$row2 = $result2->fetch_assoc();
+					$_SESSION['seller_id'] = $row2['seller_id'];
+
+					//get admin id
+					$sql3 = "SELECT admin_id FROM admin WHERE user_id = '{$row['user_id']}' ";
+					$result3 = $con->query($sql3);
+					$row3 = $result3->fetch_assoc();
+					$_SESSION['admin_id'] = $row3['admin_id'];
+
+					echo $_SESSION['admin_id'];
+					echo $_SESSION['seller_id'];
+					echo $_SESSION['bidder_id'];
+
+					
+				}else if($row['is_bidder'] == 1 && $row['is_seller']==1){
+					$_SESSION['is_bidder'] = 1;
+					$_SESSION['is_seller'] = 1;
+					$_SESSION['is_admin'] = 0;
+
+					// get bidder id
+					$sql1 = "SELECT bidder_id FROM bidder WHERE user_id = '{$row['user_id']}' ";
+					$result1 = $con->query($sql1);
+					$row1 = $result1->fetch_assoc();
+					$_SESSION['bidder_id'] = $row1['bidder_id'];
+					
+					//get seller id
+					$sql2 = "SELECT seller_id FROM seller WHERE user_id = '{$row['user_id']}' ";
+					$result2 = $con->query($sql2);
+					$row2 = $result2->fetch_assoc();
+					$_SESSION['seller_id'] = $row2['seller_id'];
+
+					echo $_SESSION['seller_id'];
+					echo $_SESSION['bidder_id'];
+				}else{
+					$_SESSION['is_bidder'] = 1;
+					$_SESSION['is_seller'] = 0;
+					$_SESSION['is_admin'] = 0;
+					
+					//get bidder id
+					$sql1 = "SELECT bidder_id FROM bidder WHERE user_id = '{$row['user_id']}' ";
+					$result1 = $con->query($sql1);
+					$row1 = $result1->fetch_assoc();
+					$_SESSION['bidder_id'] = $row1['bidder_id'];
+
+					
+					echo $_SESSION['bidder_id'];
+				}
 				header('Location:index.php');
+
 			}else {
 				$errors[]= "Wrong email or Password";
 				echo "<script>alert('{$errors[0]}')</script>";

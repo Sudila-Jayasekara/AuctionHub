@@ -1,6 +1,8 @@
 *{margin: 0; 
 	padding: 0;
 	box-sizing: border-box;
+	text-decoration: none;
+	color: black;
 }
 body{
 	font-family: Arial, "helvetica Neue", Helvetica, sans-serif; 
@@ -20,10 +22,7 @@ header .logo{
 	width: 30%;
 	margin-top: 10px;
 }
-header .logo a{
-	text-decoration: none;
-	color: black;
-}
+
 
 header .search{
 	overflow: hidden;
@@ -68,10 +67,7 @@ header .user{
 	margin-left: 400px;
 	text-align: center;
 }
-header .user a{
-	text-decoration: none;
-	color: black;
-}
+
 /* -------------------------------------- footer page -------------------------------------- */
 	
 body {
@@ -217,7 +213,6 @@ body {
 	width: 250px;
 	float: left;
 	background-color: lightgray;
-	height: 650px;
 	border-radius: 10px;
 	margin-right: 10px;
 	text-align: center;
@@ -225,6 +220,16 @@ body {
 	margin-left: 10px;
 	margin-top: 10px;
 }
+.content .side-bar p{
+	text-align: left;
+	margin-left: 30px;
+}
+
+.content .side-bar p a:hover{
+	font-size: large;
+	color: white;
+}
+
 .content .top-bar{
 	overflow: hidden;
 	background-color: lightgray;
@@ -238,10 +243,6 @@ body {
 .content .top-bar h3{
 	display: inline;
 }
-.content .top-bar a{
-	text-decoration: none;
-	color: black;
-}
 
 .item-container{
 	overflow: hidden;
@@ -251,13 +252,17 @@ body {
 
 .item-container .item{
 	overflow: hidden;
-	background-color: lightgoldenrodyellow;
+	background-color:white;
 	border: 1px solid black;
 	width: 235px;
 	border-radius: 10px;
 	margin-bottom: 14px;
 	margin-right: 14.5px;
 }
+.item-container .item:hover{
+	background-color: lightgray;
+}
+
 .item-container .item .image{
 	overflow: hidden;
 	width: 235px;
@@ -300,7 +305,10 @@ body {
 	border-radius: 10px;
 	width: 160px;
 }
-
+.item-container .item .btn-set .btn:hover{
+	background-color: #333;
+	color: white;
+}
 .item-container .item .btn-set .btn2{
 	padding: 6px 5px 5px 5px;
 	float: right;
@@ -309,6 +317,9 @@ body {
 	border-radius: 10px;
 	margin-left: 10px;
 	
+}
+.item-container .item .btn-set .btn2:hover{
+	background-color: red;
 }
 /* -------------------------------------- bidder-dashboard page -------------------------------------- */
 
@@ -319,6 +330,7 @@ body {
 .register .row-dob{
 	text-align: left;	
 }
+
 .content .side-bar h3{
 	margin-top: 5px;
 	margin-bottom: 35px;
@@ -348,4 +360,83 @@ body {
 }
 .content .top-bar a:hover{
 	color: white;
+}
+.content .top-bar h3:hover{
+	color: white;
+}
+
+/* -------------------------------------- item-details page -------------------------------------- */
+.content .item-details{
+	width: 100%;
+	margin-right: 10px;
+}
+.content .item-details .img-left{
+	width: 40%;
+	overflow: hidden;
+	float: left;
+}
+.content .item-details .img-left img{
+	border-radius: 10px;
+	width: 600px;
+}
+.content .item-details .details-right{
+	width: 30%;
+	overflow: hidden;
+	float: left;	
+	margin-left: 20px;
+}
+.content .item-details .details-right h1{
+	font-size: 40px;
+}
+.content .item-details .details-right h3{
+	margin-bottom: 5px;
+}
+.content .item-details .details-right hr{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.content .item-details .details-right input,.content .item-details .details-right button{
+	width: 400px;
+	padding: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	border-radius: 5px;
+	border: 1px solid #ccd0d5;
+	display: block;
+}
+.content .item-details .details-right button:hover{
+	background-color: #333;
+	color: white;
+}
+.content .item-details .details-right input[type="submit"]:hover{
+	background-color: #333;
+	color: white;
+}
+
+.timer{
+	display: inline;
+}
+/* --------------------------------------Manage item page -------------------------------------- */
+.container table{
+	margin: auto;
+	
+}
+table {
+	border-collapse: collapse;
+}
+table th , table td{
+	border: 1px solid black;
+	padding: 5px;
+
+}
+
+table td .win{
+	border: 1px solid rgb(230, 16, 16);
+
+}
+
+.container .btnT{
+	width: 100px;
+	padding: 2px;
+	margin-bottom: 5px;
 }

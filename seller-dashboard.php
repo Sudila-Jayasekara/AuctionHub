@@ -19,6 +19,16 @@
 		$address = $row['address']; 
 		$password = $row['password']; 
 	}
+	if (isset($_SESSION['seller_id'])) {
+		$sql = "SELECT * FROM seller WHERE seller_id = {$_SESSION['seller_id']}";
+		$result = $con->query($sql);
+		$row =$result->fetch_assoc();
+	
+		$store_name = $row['store_name']; 
+		$store_description = $row['store_description']; 
+		$store_address = $row['store_address'];
+		
+	}	
 
 
 	if(isset($_POST['update'])){
@@ -29,11 +39,9 @@
 		$gender = $_POST['gender']; 
 		$dob = $_POST['dob'];
 		$address = $_POST['address']; 
-		$password = $_POST['password']; 
-		$password2 = $_POST['password2']; 
 
 		//checking required fields 
-		$req_fields = array('first_name','last_name','email','phone','gender','dob','address','password','password2');
+		$req_fields = array('first_name','last_name','email','phone','gender','dob','address');
 		foreach ($req_fields as $fields) {
 			if (empty(trim($_POST[$fields]))) {
 				$errors[]= "$fields is required";
@@ -50,10 +58,6 @@
 			$errors[]= "Invalid phone number";
 		}
 
-		//check both password same or not
-		if($password!==$password2){
-			$errors[] = "Password not match";
-		}
 
 		if(empty($errors)){
 			//sanitizing inputs
@@ -65,8 +69,7 @@
 			$gender = $con->real_escape_string($_POST['gender']); 
 			$dob = $con->real_escape_string($_POST['dob']); 
 			$address = $con->real_escape_string($_POST['address']); 
-			$password = $con->real_escape_string($_POST['password']); 
-			$hashed_password = sha1($password);
+
 			
 			//create database query
 			//user index
@@ -77,14 +80,10 @@
 			dob = '$dob',
 			gender = '$gender',
 			phone = '$phone',
-			address = '$address',
-			is_bidder = 1,
-			is_seller = 0,
-			is_seller = 0,
-			is_admin = 0,
-			password = '$hashed_password'
+			address = '$address'
 			WHERE user_id = '{$_SESSION['user_id']}'";
 			$result = $con -> query($sql);
+
 		}else{
 			echo "<script>alert('{$errors[0]}')</script>";
 			// foreach ($errors as $e ) {
@@ -107,19 +106,8 @@
 	<?php require_once('inc/header.php')?>
 	<div class="content">
 		<div class="side-bar">
-			<h3>Welcome <?php echo $_SESSION['first_name'];?></h3>
-			<button class="btn">Bid History</button>
-			<button>Watchlist</button>
-			<button>Change Password</button>
-			<hr>
-			<button><a href="add-new-item.php">Add New Item</a></button>
-			<button>Manage Item</button>
-			<hr>
-			<button>Deactive Selling</button>
-			<button>Logout</button>
-
-		</div>
-
+			<?php require_once('inc/seller-side-bar.php')?>
+		</div>	
 		<div class="top-bar">
 			<h3><a href="index.php">AuctionHub</a></h3>
 			<h3> > </h3>
@@ -152,8 +140,6 @@
 						<input type="date" name="dob" value="<?php echo $dob ?>">
 						</div>	
 						<textarea name="address"><?php echo $address ?></textarea>
-						<input type="text" name="password" placeholder="New Password">
-						<input type="text" name="password2" placeholder="Re-Enter Password">
 						<input type="submit" name="update" value="update">
 				</fieldset>
 			</form>

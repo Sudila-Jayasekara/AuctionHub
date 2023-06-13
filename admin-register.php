@@ -75,7 +75,7 @@
 
 			//create new user in users table
 			$sql = "INSERT INTO users(first_name,last_name,email,dob,gender,phone,address,registration_date,is_bidder,is_seller,is_admin,password)
-					VALUES('{$first_name}','{$last_name}','{$email}','{$dob}','{$gender}','{$phone}','{$address}','{$registration_date}',1,0,0,'{$hashed_password}')";
+					VALUES('{$first_name}','{$last_name}','{$email}','{$dob}','{$gender}','{$phone}','{$address}','{$registration_date}',1,1,1,'{$hashed_password}')";
 			$result = $con -> query($sql);
 
 			$sql = "SELECT * FROM users WHERE email='{$email}' and password ='{$hashed_password}' LIMIT 1";
@@ -84,7 +84,20 @@
 			$user_id = $row['user_id'];
 
 			//create new bidder in bidder table
-			$sql = "INSERT INTO bidder(bidder_id, user_id)VALUES('{$user_id}','{$user_id}')";
+			$sql = "INSERT INTO bidder(user_id)VALUES('{$user_id}')";
+			$result = $con->query($sql);
+			
+			//create new admin in admin table
+			$sql = "INSERT INTO admin(user_id)VALUES('{$user_id}')";
+			$result = $con->query($sql);
+
+			$store_name = $con->real_escape_string($_POST['store_name']);
+			$store_description= $con->real_escape_string($_POST['store_description']);
+			$store_address = $con->real_escape_string($_POST['store_address']);
+
+			//create new seller account
+			$sql = "INSERT INTO seller(store_name, store_description ,store_address, user_id)
+					VALUES('{$store_name}','{$store_description}','{$store_address}','{$user_id}')";
 			$result = $con->query($sql);
 
 		}else {
@@ -92,23 +105,24 @@
 			echo "<script>history.back()</script>";
 		}
 	}
+?>
+<?php 
 
-
-
+	
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Register Page</title>
+	<title>Special admin register</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 	<?php require_once 'inc/guest-header.php'; ?>
-		<form class="register" action="register.php" method="post">
+		<form class="register" action="admin-register.php" method="post">
 			<fieldset>
-					<h2>Register to AuctionHub</h2>
+					<h2>Register to AuctionHub as Admin</h2>
 					<div class="row">
 						<div class="item left"><input type="text" name="first_name" placeholder="First Name"></div>
 						<div class="item right"><input type="text" name="last_name" placeholder="Last Name"></div>
@@ -132,6 +146,9 @@
 						<input type="date" name="dob">
 					</div>
 					<textarea name="address"  placeholder="Address"></textarea>
+					<input type="text" name="store_name" placeholder="Store Name">
+					<input type="text" name="store_description" placeholder="Store Description">
+					<textarea name="store_address"> Store Address </textarea>
 					<input type="text" name="password" placeholder="Password">
 					<input type="text" name="password2" placeholder="Re-Enter Password">
 					<div class="row-check">
