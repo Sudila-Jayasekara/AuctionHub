@@ -14,7 +14,7 @@
 		$item.="<td>{$row['email']}</td>";
 		$item.="<td>{$row['address']}</td>";
 		$item.="<td>{$row['phone']}</td>";
-		$item.="<td><a href='edit-category.php?user_id={$row['user_id']}'><button class='btnT'>waning</button></a> <a href='delete-category.php?user_id={$row['user_id']}'  onclick='return confirm(\"Are You sure to delete this category\")';> <button class='btnT'>suspend</button></a></td>";
+		$item.="<td><a><button class='btnT'>waning</button></a> <a onclick='return confirm(\"Are You sure to suspend user\")';> <button class='btnT'>suspend</button></a></td>";
 		$item.="</tr>";
 	}
 ?>
